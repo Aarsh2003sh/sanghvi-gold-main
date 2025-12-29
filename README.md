@@ -1,4 +1,5 @@
-# Sanghvi Gold | E-Commerce Jewelry Store
+
+# Sanghavi Gold | E-Commerce Jewelry Store
 
 A premium, production-ready e-commerce platform for high-end jewelry, featuring multi-language support, live gold price tracking, and a virtual consultation system.
 
@@ -18,7 +19,7 @@ A premium, production-ready e-commerce platform for high-end jewelry, featuring 
 - **Tailwind CSS**
 - **Lucide React** (Icons)
 - **React Router 7**
-- **Gemini AI** (Used for generating artisan descriptions)
+- **Gemini API** (Used for generating artisan descriptions)
 
 ## 🛠️ Getting Started
 
@@ -26,7 +27,7 @@ This project is built using ES modules and can be served with any local developm
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/sanghvi-gold.git
+   git clone https://github.com/YOUR_USERNAME/sanghavi-gold.git
    ```
 
 2. Open `index.html` in your browser or use a live server extension.
@@ -39,4 +40,4 @@ To access the management portal:
 3. Manage inventory, upload images, and view orders.
 
 ---
-© 2025 Sanghvi Gold Jewels Private Limited.
+© 2025 Sanghavi Gold Jewels Private Limited.

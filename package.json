@@ -1,6 +1,6 @@
 
 {
-  "name": "sanghvi-gold",
+  "name": "sanghavi-gold",
   "version": "1.0.0",
   "description": "Premium handcrafted jewelry e-commerce store.",
   "main": "index.tsx",
@@ -15,7 +15,7 @@
     "react",
     "luxury"
   ],
-  "author": "Sanghvi Gold",
+  "author": "Sanghavi Gold",
   "license": "MIT",
   "dependencies": {
     "react": "^19.2.3",

@@ -15,7 +15,7 @@ import { INITIAL_PRODUCTS } from './constants';
 
 // --- Brand Logo Component ---
 
-const SanghviLogo = ({ className = "w-10 h-10" }: { className?: string }) => (
+const SanghaviLogo = ({ className = "w-10 h-10" }: { className?: string }) => (
   <div className={`${className} bg-[#1A1A1A] rounded flex items-center justify-center p-1.5 shadow-sm`}>
     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
       <path d="M50 5L90 27.5V72.5L50 95L10 72.5V27.5L50 5Z" stroke="#D4AF37" strokeWidth="4" />
@@ -44,6 +44,7 @@ const TRANSLATIONS = {
     prefTime: "Preferred Time", scheduleWhatsApp: "Schedule via WhatsApp", artisanHeritage: "Handcrafted Excellence Since 1985",
     translate: "Translate"
   },
+  // ... other translations stay same as previous
   Hindi: {
     home: "होम", gold: "सोना", silver: "चांदी", gemstones: "रत्न",
     buyNow: "अभी खरीदें", videoCall: "वीडियो कॉल", livePrice: "लाइव 22K मूल्य",
@@ -96,7 +97,7 @@ const TRANSLATIONS = {
     home: "ہوم", gold: "سونا", silver: "چاندی", gemstones: "جواہرات",
     buyNow: "ابھی خریدیں", videoCall: "ویڈیو کال", livePrice: "لائیو 22K قیمت",
     saving: "بچت", shoppingBag: "شاپنگ بیگ", quickDelivery: "فوری ترسیل",
-    seeSimilar: "ملتے جلتے دیکھیں", artisanNote: "کاریگر का नोट", purity: "پاکیزگی ہال مارک",
+    seeSimilar: "ملتے جلتے دیکھیں", artisanNote: "کاریگر کا نوٹ", purity: "پاکیزگی ہال مارک",
     exchange: "لائف ٹائم ایکسچینج", treasury: "خزانہ", hallmarkNote: "تمام گولڈ سیٹس پر مفت 24 گھنٹے ایکسپریس شپنگ",
     heroTitle: "خالص پاکیزگی کے شاہکار", heroSubtitle: "اپنا مجموعہ شروع کریں", curations: "موجودہ مجموعے",
     bagEmpty: "آپ کا بیگ خالی ہے", discoverNow: "ابھی دریافت کریں", summary: "خلاصہ",
@@ -112,8 +113,7 @@ const TRANSLATIONS = {
 
 type Language = keyof typeof TRANSLATIONS;
 
-// --- Context & State Management ---
-
+// ... Context & State Management stays same as previous
 interface AppContextType {
   products: Product[];
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
@@ -135,36 +135,36 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('sgj_products');
+    const saved = localStorage.getItem('sagj_products');
     return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
   });
 
   const [cart, setCart] = useState<CartItem[]>(() => {
-    const saved = localStorage.getItem('sgj_cart');
+    const saved = localStorage.getItem('sagj_cart');
     return saved ? JSON.parse(saved) : [];
   });
 
   const [orders, setOrders] = useState<Order[]>(() => {
-    const saved = localStorage.getItem('sgj_orders');
+    const saved = localStorage.getItem('sagj_orders');
     return saved ? JSON.parse(saved) : [];
   });
 
   const [isAdmin, setIsAdmin] = useState(() => {
-    return localStorage.getItem('sgj_is_admin') === 'true';
+    return localStorage.getItem('sagj_is_admin') === 'true';
   });
 
   const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('sgj_lang');
+    const saved = localStorage.getItem('sagj_lang');
     return (saved as Language) || 'English';
   });
 
   const t = TRANSLATIONS[language];
 
-  useEffect(() => localStorage.setItem('sgj_products', JSON.stringify(products)), [products]);
-  useEffect(() => localStorage.setItem('sgj_cart', JSON.stringify(cart)), [cart]);
-  useEffect(() => localStorage.setItem('sgj_orders', JSON.stringify(orders)), [orders]);
-  useEffect(() => localStorage.setItem('sgj_is_admin', isAdmin.toString()), [isAdmin]);
-  useEffect(() => localStorage.setItem('sgj_lang', language), [language]);
+  useEffect(() => localStorage.setItem('sagj_products', JSON.stringify(products)), [products]);
+  useEffect(() => localStorage.setItem('sagj_cart', JSON.stringify(cart)), [cart]);
+  useEffect(() => localStorage.setItem('sagj_orders', JSON.stringify(orders)), [orders]);
+  useEffect(() => localStorage.setItem('sagj_is_admin', isAdmin.toString()), [isAdmin]);
+  useEffect(() => localStorage.setItem('sagj_lang', language), [language]);
 
   const addToCart = (product: Product, quantity: number) => {
     setCart(prev => {
@@ -245,7 +245,7 @@ const LiveGoldPriceNavWidget = () => {
   );
 };
 
-// --- Language Selector ---
+// ... Language Selector & Consultation Modal stay same as previous
 
 const LanguageDropdown = () => {
   const { language, setLanguage, t } = useApp();
@@ -295,8 +295,6 @@ const LanguageDropdown = () => {
   );
 };
 
-// --- Consultation Modal ---
-
 const VideoConsultationModal = ({ product, onClose }: { product: Product, onClose: () => void }) => {
   const { t } = useApp();
   const [step, setStep] = useState<'options' | 'live' | 'schedule'>('options');
@@ -324,7 +322,7 @@ const VideoConsultationModal = ({ product, onClose }: { product: Product, onClos
 
   const handleSchedule = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hello Sanghvi Gold, I'm ${scheduleData.name}. I would like to schedule a Video Consultation for the "${product.name}" on ${scheduleData.date} at ${scheduleData.time}. Link: ${window.location.href}`;
+    const message = `Hello Sanghavi Gold, I'm ${scheduleData.name}. I would like to schedule a Video Consultation for the "${product.name}" on ${scheduleData.date} at ${scheduleData.time}. Link: ${window.location.href}`;
     window.open(`https://wa.me/91000000000?text=${encodeURIComponent(message)}`, '_blank');
     onClose();
   };
@@ -399,7 +397,82 @@ const VideoConsultationModal = ({ product, onClose }: { product: Product, onClos
   );
 };
 
-// --- Navbar ---
+// --- Magnifier Component ---
+
+const ImageMagnifier = ({ 
+  src, 
+  width, 
+  height, 
+  magnifierSize = 160, 
+  zoomLevel = 2.5 
+}: { 
+  src: string; 
+  width?: string | number; 
+  height?: string | number; 
+  magnifierSize?: number; 
+  zoomLevel?: number;
+}) => {
+  const [[x, y], setXY] = useState([0, 0]);
+  const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
+  const [showMagnifier, setShowMagnifier] = useState(false);
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        height: height,
+        width: width
+      }}
+      className="w-full h-full cursor-none overflow-hidden"
+      onMouseEnter={(e) => {
+        const elem = e.currentTarget;
+        const { width, height } = elem.getBoundingClientRect();
+        setSize([width, height]);
+        setShowMagnifier(true);
+      }}
+      onMouseMove={(e) => {
+        const elem = e.currentTarget;
+        const { top, left } = elem.getBoundingClientRect();
+        const x = e.pageX - left - window.pageXOffset;
+        const y = e.pageY - top - window.pageYOffset;
+        setXY([x, y]);
+      }}
+      onMouseLeave={() => {
+        setShowMagnifier(false);
+      }}
+    >
+      <img
+        src={src}
+        className="w-full h-full object-cover"
+        alt="Magnifiable Product"
+      />
+
+      <div
+        style={{
+          display: showMagnifier ? "" : "none",
+          position: "absolute",
+          pointerEvents: "none",
+          height: `${magnifierSize}px`,
+          width: `${magnifierSize}px`,
+          top: `${y - magnifierSize / 2}px`,
+          left: `${x - magnifierSize / 2}px`,
+          opacity: "1",
+          border: "2px solid #b8860b",
+          borderRadius: "50%",
+          backgroundColor: "white",
+          backgroundImage: `url('${src}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: `${imgWidth * zoomLevel}px ${imgHeight * zoomLevel}px`,
+          backgroundPosition: `${-x * zoomLevel + magnifierSize / 2}px ${-y * zoomLevel + magnifierSize / 2}px`,
+          boxShadow: "0 0 20px rgba(184, 134, 11, 0.3), inset 0 0 10px rgba(0,0,0,0.1)",
+          zIndex: 50
+        }}
+      />
+    </div>
+  );
+};
+
+// ... Navbar & Forms stay same as previous
 
 const Navbar = () => {
   const { cart, t, isAdmin } = useApp();
@@ -426,9 +499,9 @@ const Navbar = () => {
           </div>
 
           <Link to="/" className="flex items-center space-x-3 group">
-            <SanghviLogo className="w-10 h-10 md:w-12 md:h-12 transition-transform group-hover:scale-105" />
+            <SanghaviLogo className="w-10 h-10 md:w-12 md:h-12 transition-transform group-hover:scale-105" />
             <div className="flex flex-col">
-              <span className="serif text-xl md:text-2xl font-bold tracking-tighter text-[#1a1a1a] leading-none">SANGHVI</span>
+              <span className="serif text-xl md:text-2xl font-bold tracking-tighter text-[#1a1a1a] leading-none">SANGHAVI</span>
               <span className="text-[7px] md:text-[8px] tracking-[0.4em] uppercase font-bold text-[#b8860b] -mt-0.5">Gold</span>
             </div>
           </Link>
@@ -466,8 +539,6 @@ const Navbar = () => {
     </>
   );
 };
-
-// --- Product Form Component ---
 
 const ProductFormModal = ({ onClose }: { onClose: () => void }) => {
   const { setProducts } = useApp();
@@ -768,7 +839,7 @@ const AdminDashboard = () => {
   );
 };
 
-// --- Main Views ---
+// ... Main Views
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -806,19 +877,24 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-8 relative">
             <div className="bg-[#F7F7F7] aspect-[4/5] rounded-xl overflow-hidden shadow-sm relative group">
-              <img src={product.images[selectedImage]} className="w-full h-full object-cover" alt={product.name} />
-              <div className="absolute top-6 left-0">
+              {/* Added ImageMagnifier here */}
+              <ImageMagnifier 
+                src={product.images[selectedImage]} 
+                magnifierSize={180}
+                zoomLevel={2.5}
+              />
+              <div className="absolute top-6 left-0 pointer-events-none z-10">
                 <div className="bg-[#FCE3C1] text-[#935B00] px-6 py-2 rounded-r-full text-[10px] font-extrabold uppercase tracking-widest shadow-md">
                    {t.quickDelivery}
                 </div>
               </div>
-              <div className="absolute bottom-6 left-6">
-                 <button className="bg-white/90 backdrop-blur-md border border-gray-100 text-[#9365E4] px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center hover:bg-white transition-all">
+              <div className="absolute bottom-6 left-6 pointer-events-none z-10">
+                 <button className="bg-white/90 backdrop-blur-md border border-gray-100 text-[#9365E4] px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center hover:bg-white transition-all pointer-events-auto">
                    <Eye size={14} className="mr-2" /> {t.seeSimilar}
                  </button>
               </div>
-              <div className="absolute bottom-6 right-6">
-                <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center space-x-2">
+              <div className="absolute bottom-6 right-6 pointer-events-none z-10">
+                <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center space-x-2 pointer-events-auto">
                   <span className="text-green-600 font-bold text-xs flex items-center"><Star size={12} fill="currentColor" className="mr-1"/> 4.9</span>
                   <span className="text-gray-400 text-[10px] border-l border-gray-200 pl-2">128</span>
                 </div>
@@ -887,6 +963,8 @@ const ProductDetail = () => {
     </div>
   );
 };
+
+// ... Rest of the components (ProductCard, Home, Cart, Shop, etc.) stay same
 
 const ProductCard = ({ product }: { product: Product }) => (
   <Link to={`/product/${product.id}`} className="group block transform transition-all duration-500 hover:-translate-y-2">
@@ -1050,9 +1128,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <Link to="/" className="flex items-center space-x-3 group">
-              <SanghviLogo className="w-10 h-10 border border-gray-800" />
+              <SanghaviLogo className="w-10 h-10 border border-gray-800" />
               <div className="flex flex-col">
-                <span className="serif text-xl font-bold tracking-tighter text-white">SANGHVI</span>
+                <span className="serif text-xl font-bold tracking-tighter text-white">SANGHAVI</span>
                 <span className="text-[7px] tracking-[0.4em] uppercase font-bold text-[#b8860b] -mt-0.5">Gold</span>
               </div>
             </Link>
@@ -1084,7 +1162,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-gray-800 pt-8 text-center md:text-left">
-          <p className="text-[10px] text-gray-500 uppercase tracking-widest">© 2025 Sanghvi Gold Jewels Private Limited. All Rights Reserved.</p>
+          <p className="text-[10px] text-gray-500 uppercase tracking-widest">© 2025 Sanghavi Gold Jewels Private Limited. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
