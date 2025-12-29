@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Sanghvi Gold",
+  "description": "Premium, handcrafted jewelry e-commerce store specializing in gold, silver, and gemstone collections with a modern shopping experience.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
